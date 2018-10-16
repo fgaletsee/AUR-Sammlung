@@ -1,0 +1,32 @@
+# Maintainer : Franz
+
+_pkgname="xournal-shortcuts"
+pkgname="${_pkgname}-git"
+
+pkgver=0.4.8.2016
+pkgrel=1
+pkgdesc="Xournal with custom shortcuts"
+arch=('i686' 'x86_64')
+url="https://github.com/fgaletsee/xournal_shortcuts/"
+license=('GPL-2.0')
+makedepends=('git' 'cmake' 'gettext' 'boost')
+depends=('poppler-glib')
+conflicts=('xournal')
+source=("${_pkgname}::git+https://github.com/fgaletsee/xournal_shortcuts.git")
+sha256sums=('SKIP')
+
+
+prepare() {
+echo "Test"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	./autogen.sh --prefix=/usr
+	make -j
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	make DESTDIR="$pkgdir/"  install
+}
