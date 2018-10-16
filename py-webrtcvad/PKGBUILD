@@ -1,0 +1,25 @@
+# Maintainer: Franz G. Aletsee <franz@aletsee.net>
+
+pkgname=('py-webrtcvad')
+_pkgname=py-webrtcvad
+pkgver=1
+pkgrel=2
+pkgdesc="VAD python using webrt"
+arch=('i686' 'x86_64')
+url='https://github.com/wiseman/py-webrtcvad.git'
+license=('')
+makedepends=('git' )
+options=()
+source=("${_pkgname}::git+https://github.com/wiseman/py-webrtcvad.git")
+md5sums=('SKIP')
+
+
+build() {
+	cd $_pkgname
+    python setup.py build
+}
+
+package() {
+	cd $_pkgname
+    python setup.py install --root="$pkgdir/" --optimize=1 --skip-build
+}
